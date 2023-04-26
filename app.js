@@ -15,3 +15,16 @@
 // require('./mindfuck')
 // console.log("helloo");
 
+
+const http = require("http")
+
+const server = http.createServer((res,req)=>{
+    if(req.url === "/"){
+        res.end("home")
+    }
+    
+})
+
+server.listen(5000,()=>{
+    console.log("server started")
+})
