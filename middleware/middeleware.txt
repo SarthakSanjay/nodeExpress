@@ -1,3 +1,9 @@
 express middleware are functions that execute during the request to the server
 each middleware functions have access to request and response objects
 and its functionality (sky is the limit)
+
+
+options for middleware-
+[1] our own
+[2] express built in middlewares
+[3] third party e.g morgan

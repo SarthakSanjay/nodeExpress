@@ -1,25 +1,25 @@
 const express = require('express')
 const app = express()
+const {person} = require('./middleware/data.js')
+//static assets
+app.use(express.static('./methods-public'))
+//parse form data
+app.use(express.urlencoded({extended:false}))
 
-// req => middleware => res
-// req comes in , then we will do something (some kind of functionality), and then send response
-const logger = (req,res,next) =>{
-    const method = req.method
-    const url = req.url
-    const time = new Date().getFullYear()
-    console.log(method, url , time)
-    next()
-}
-//always terminate or send back your res
-app.get('/', logger,(req,res)=>{ //here logger is the middleware function
+// express.urlencoded() is a middleware function that parses incoming requests with urlencoded payloads and is typically used for handling form data. It populates the req.body object with key-value pairs, where the values can be strings or arrays.
+
+app.post('/login',(req,res)=>{
+    const {name} = req.body
+    if(name){
+        return res.status(200).send(`Welcome ${name}`)
+    }
+
     
-    res.send("home")
-})
-app.get('/about',logger,(req,res)=>{
-    res.send("about")
+    res.status(401).send('provide credentials')
+
 })
 
-
-app.listen(5000 , ()=>{
-    console.log("app listening on port 5000...")
+app.get('/api/people', (req, res)=>{
+    res.status(200).json({success: true, data:person})
 })
+app.listen(5000,()=> console.log("server started"))

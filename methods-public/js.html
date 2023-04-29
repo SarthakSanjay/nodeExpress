@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>traditional</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <nav>
+        <h1>HTTP METHODS</h1>
+        <ul>
+            <a href="/methods-public/index.html">
+                <li>Regular</li>
+            </a>
+            <a href="./js.html">
+                <li>Javascript</li>
+            </a>
+        </ul>
+    </nav>
+
+    <form>
+        <h3>Javascript form</h3>
+        <div class="form-row">
+            <label for="name">Enter name</label>
+            <input type="text" name="name" id="name" autocomplete="false" />
+            <!-- name is the key for key value pair in body -->
+        </div>
+        <button type="submit">submit</button>
+
+    </form>
+    <script>
+        const axios = require('axios/dist/browser/axios.cjs'); // browser
+        // const axios = require('axios/dist/node/axios.cjs'); // node
+
+        const result = document.getElementById('name')
+        const fetchPeople = async()=>{
+            try{
+                const {data} = await axios.get('/api/people')
+
+                const people = data.data.map((person)=>{
+                    return `<h5>${person.name}</h5>`
+                })
+                result.innerHTML = people.join('')
+            }catch(error){
+                result.innerHTML = `<div class= 'alert alert-danger'>Cant fetch data</div>`
+
+            }
+        }
+        fetchPeople()
+    </script>
+</body>
+
+</html>
