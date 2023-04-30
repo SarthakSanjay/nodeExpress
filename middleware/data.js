@@ -50,7 +50,7 @@ const product = [
       },
       {
         "id": 5,
-        "name": "Michael"
+        "name": "Michael Jack"
       }
     ]
   

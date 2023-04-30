@@ -27,14 +27,16 @@
         <h3>Javascript form</h3>
         <div class="form-row">
             <label for="name">Enter name</label>
-            <input type="text" name="name" id="name" autocomplete="false" />
+            <input class="form-input" type="text" name="name" id="name" autocomplete="false" />
             <!-- name is the key for key value pair in body -->
+            <small class="form-alert"></small>
         </div>
-        <button type="submit">submit</button>
+        <button class="submit-btn" type="submit">submit</button>
 
     </form>
+    <div class="result"></div>
     <script>
-        const axios = require('axios/dist/browser/axios.cjs'); // browser
+        // const axios = require('axios/dist/browser/axios.cjs'); // browser
         // const axios = require('axios/dist/node/axios.cjs'); // node
 
         const result = document.getElementById('name')
@@ -52,6 +54,25 @@
             }
         }
         fetchPeople()
+            // submit form
+      const btn = document.querySelector('.submit-btn')
+      const input = document.querySelector('.form-input')
+      const formAlert = document.querySelector('.form-alert')
+      btn.addEventListener('click', async (e) => {
+        e.preventDefault()
+        const nameValue = input.value
+
+        try {
+          const { data } = await axios.post('/api/people', { name: nameValue })
+          const h5 = document.createElement('h5')
+          h5.textContent = data.person
+          result.appendChild(h5)
+        } catch (error) {
+          // console.log(error.response)
+          formAlert.textContent = error.response.data.msg
+        }
+        input.value = ''
+      })
     </script>
 </body>
 
