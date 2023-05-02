@@ -1,0 +1,11 @@
+# GET http://localhost:5000/test
+# {
+#     "name": "John"
+# }
+
+POST   http://localhost:5000/test
+
+Content-Type: application/txt
+{
+    "name": "John"
+}
